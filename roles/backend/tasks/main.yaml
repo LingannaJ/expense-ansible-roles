@@ -39,7 +39,7 @@
 - name: copy backend service
   ansible.builtin.template:
     src: backend.service.j2
-    dest: /etc/systemd/system/backend.service.j2
+    dest: /etc/systemd/system/backend.service
 
 - name: install python mysql dependencies
   ansible.builtin.pip: 
@@ -47,7 +47,6 @@
     - PyMySQL # to connect MySQL DB from Ansible
     - cryptography
     executable: pip3.9 # pip3.11 if python version is 3.11
-
 - name: import data into mysql
   community.mysql.mysql_db:
     login_user: "{{ login_user }}"
@@ -56,11 +55,9 @@
     target: /app/schema/backend.sql
     state: import
     name: all
-
 - name: daemon reload
   ansible.builtin.systemd_service:
     daemon_reload: true
-
 - name: start and enable backend service
   ansible.builtin.service:
     name: backend
