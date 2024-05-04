@@ -1,0 +1,6 @@
+- name: Configure DB Server
+  hosts: db
+  become: yes
+  roles:
+    - db
+    
