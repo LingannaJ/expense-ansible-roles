@@ -30,7 +30,7 @@
       src: expense.conf.j2
       dest: /etc/nginx/default.d/expense.conf
     notify:
-      - restartet nginx
+      - restart nginx
     
 
 # if there is any change in configuration then only you need to restart nginx
